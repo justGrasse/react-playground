@@ -9,10 +9,16 @@ ReactDOM.render(
 );
 
 class Square extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      value: null,
+    }
+  };
   render() {
     return (
-      <button className="square">
-        {this.props.value}
+      <button className="square" onClick={() => this.setState({value: 'J'})}>
+        {this.state.value}
       </button>
     );
   }
