@@ -51,7 +51,8 @@ class Game extends React.Component {
       history: [{
         squares: Array(9).fill(null)
       }],
-      jIsNext: true
+      jIsNext: true,
+      stepNumber: 0,
     };
   }
   handleClick(i) {
@@ -78,7 +79,7 @@ class Game extends React.Component {
       'Move #' + move :
       'Game start';
       return (
-        <li>
+        <li key={move}>
         <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
       );
