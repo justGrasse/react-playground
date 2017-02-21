@@ -21,18 +21,22 @@ class Board extends React.Component {
     super();
     this.state = {
       squares: Array(9).fill(null),
-    }
+      jIsNext: true,
+    };
   }
   renderSquare(i) {
     return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
   }
   handleClick(i) {
     const squares = this.state.squares.slice();
-    squares[i] = 'J';
-    this.setState({squares: squares});
+    squares[i] = this.state.jIsNext ? 'J' : 'G'
+    this.setState({
+      squares: squares,
+      jIsNext: !this.state.jIsNext,
+    });
   }
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.jIsNext ? 'J' : 'G');
     return (
       <div>
         <div className="status">{status}</div>
