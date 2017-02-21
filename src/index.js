@@ -8,20 +8,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-class Square extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      value: null,
-    }
-  };
-  render() {
-    return (
-      <button className="square" onClick={() => this.props.onClick()}>
-        {this.props.value}
-      </button>
-    );
-  }
+function Square(props) {
+  return (
+    <button className="square" onClick={() => this.props.onClick()}>
+      {this.props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
