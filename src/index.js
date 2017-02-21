@@ -56,8 +56,9 @@ class Game extends React.Component {
     };
   }
   handleClick(i) {
-    const history = this.state.history
-    const current = history[history.length - 1];
+    const step = this.stepNumber;
+    const history = this.state.history.slice(0,step)
+    const current = history[this.state.stepNumber];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -68,19 +69,26 @@ class Game extends React.Component {
         squares: squares
       }]),
       jIsNext: !this.state.jIsNext,
+      stepNumber: history.length,
+    });
+  }
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      jIsNext: (step % 2) ? false : true,
     });
   }
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const moves = history.map((step, move) => {
       const desc = move ?
-      'Move #' + move :
-      'Game start';
+        'Move #' + move :
+        'Game start';
       return (
         <li key={move}>
-        <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
       );
     });
